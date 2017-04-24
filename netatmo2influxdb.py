@@ -18,16 +18,28 @@ outdoormodule = 'Balkon'
 # netatmo
 ##
 # get current weather station data
-auth = lnetatmo.ClientAuth(username="xxx",
-                           password="yyy",
-                           clientId = "zzz", 
-                           clientSecret = "uuu")
+auth = lnetatmo.ClientAuth(username="xx",
+                           password="yy",
+                           clientId = "zz", 
+                           clientSecret = "uu")
 weatherData = lnetatmo.WeatherStationData(auth)
 lastdata = weatherData.lastData()
 if (debug):
     print("Info:\n"+str(lastdata)) 
-            
+ # modify data types for influx db
+lastdata[mainmodule]['AbsolutePressure']=float(lastdata[mainmodule]['AbsolutePressure'])           
+lastdata[mainmodule]['CO2']=float(lastdata[mainmodule]['CO2'])  
+lastdata[mainmodule]['Humidity']=float(lastdata[mainmodule]['Humidity']) 
+lastdata[mainmodule]['Noise']=float(lastdata[mainmodule]['Noise']) 
+lastdata[mainmodule]['Pressure']=float(lastdata[mainmodule]['Pressure'])
+lastdata[mainmodule]['Temperature']=float(lastdata[mainmodule]['Temperature'])  
+lastdata[mainmodule]['max_temp']=float(lastdata[mainmodule]['max_temp'])
+lastdata[mainmodule]['min_temp']=float(lastdata[mainmodule]['min_temp'])
 
+lastdata[outdoormodule]['Humidity']=float(lastdata[outdoormodule]['Humidity'])
+lastdata[outdoormodule]['Temperature']=float(lastdata[outdoormodule]['Temperature'])
+lastdata[outdoormodule]['max_temp']=float(lastdata[outdoormodule]['max_temp'])
+lastdata[outdoormodule]['min_temp']=float(lastdata[outdoormodule]['min_temp'])
 
 ## 
 # influxdb
