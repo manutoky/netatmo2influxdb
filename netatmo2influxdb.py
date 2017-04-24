@@ -61,12 +61,12 @@ client.switch_database(netatmoDB)
 data={"measurement": mainmodule,
              "time": lastdata[mainmodule]['When']}
 data["fields"]= lastdata[mainmodule]
-client.write_points([data],protocol='json')
+client.write_points([data],protocol='json', time_precision='s')
 # prepare data for outdoor module
 data={"measurement": outdoormodule,
              "time": lastdata[outdoormodule]['When']}
 data["fields"]= lastdata[outdoormodule]
-client.write_points([data],protocol='json')             
+client.write_points([data],protocol='json', time_precision='s')             
 
 
 
